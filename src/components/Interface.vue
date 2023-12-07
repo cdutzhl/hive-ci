@@ -1,6 +1,6 @@
 <template>
   <div>
-    用例
+    接口
   </div>
 </template>
 
