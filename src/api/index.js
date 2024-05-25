@@ -7,7 +7,7 @@ const request = axios.create({
         return true
     },
     // 指定基本的url地址
-    baseURL: 'http://127.0.0.1:8081',
+    baseURL: 'http://127.0.0.1:8081/hive',
 })
 
 

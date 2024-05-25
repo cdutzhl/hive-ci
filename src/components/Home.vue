@@ -22,12 +22,18 @@
           <el-submenu index="projectManage">
             <template slot="title">
               <i class="el-icon-s-home"></i>
-              <span>项目管理</span>
+              <span>系统管理</span>
             </template>
-            <el-menu-item index="/projects">
+            <el-menu-item index="/user">
               <template slot="title">
                 <i class="el-icon-document-copy"></i>
-                <span>项目列表</span>
+                <span>用户管理</span>
+              </template>
+            </el-menu-item>
+             <el-menu-item index="/projects">
+              <template slot="title">
+                <i class="el-icon-document-copy"></i>
+                <span>项目组管理</span>
               </template>
             </el-menu-item>
           </el-submenu>

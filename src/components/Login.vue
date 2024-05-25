@@ -90,6 +90,8 @@
                             type: 'success',
                             duration: 1000
                         });
+                        console.log('token',response.data.token)
+                       // console.log('userName',response.data.userName)
                         // duration: 1000，弹窗停留1s消失
                         window.sessionStorage.setItem('token', response.data.token)
                         window.sessionStorage.setItem('userName', response.data.userName)

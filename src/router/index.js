@@ -5,7 +5,7 @@ import Home from "../components/Home.vue"
 import Interface from "../components/Interface.vue"
 import Cases from "../components/Cases.vue"
 import Project from "../components/Project.vue"
-
+import User from "../components/system/user/User.vue"
 
 Vue.use(VueRouter)
 
@@ -30,6 +30,10 @@ const routes = [{
             path: '/project',
             name:'/project',
             component: Project
+        },{
+            path: '/user',
+            name:'/user',
+            component: User
         }
 
     ]},
