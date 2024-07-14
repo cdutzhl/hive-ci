@@ -30,11 +30,18 @@
                 <span>用户管理</span>
               </template>
             </el-menu-item>
-             <el-menu-item index="/projects">
+             <el-menu-item index="/project">
               <template slot="title">
                 <i class="el-icon-document-copy"></i>
                 <span>项目组管理</span>
               </template>
+            </el-menu-item>
+               </el-menu-item>
+                 <el-menu-item index="/system">
+                  <template slot="title">
+                    <i class="el-icon-document-copy"></i>
+                  <span>系统管理</span>
+               </template>
             </el-menu-item>
           </el-submenu>
           <!-- 接口管理 -->
@@ -128,6 +135,6 @@
 
   /* ----------侧边菜单的样式---------- */
   .el-menu {
-    height: 900px;
+    height: 850px;
   }
 </style>

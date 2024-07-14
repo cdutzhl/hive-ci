@@ -4,9 +4,9 @@ import Login from "../components/Login.vue"
 import Home from "../components/Home.vue"
 import Interface from "../components/Interface.vue"
 import Cases from "../components/Cases.vue"
-import Project from "../components/Project.vue"
+import Project from "../components/system/project/Project.vue"
 import User from "../components/system/user/User.vue"
-
+import System from "../components/system/System.vue"
 Vue.use(VueRouter)
 
 const routes = [{
@@ -34,6 +34,10 @@ const routes = [{
             path: '/user',
             name:'/user',
             component: User
+        },{
+            path: '/system',
+            name:'/system',
+            component: System
         }
 
     ]},

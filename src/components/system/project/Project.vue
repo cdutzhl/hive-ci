@@ -1,48 +1,18 @@
 <template>
   <div class="user-page">
-    <h1>用户列表</h1>
-    <div>
-        <!-- 触发弹框的按钮 -->
-        <el-button class="newUserClass" @click="addNewUser()">新增</el-button>
+    <h1>项目列表</h1>
 
-        <!-- 新增弹框 -->
-        <el-dialog
-          title="新增用户"
-          :visible.sync="dialogVisible"
-          @close="resetUserForm()">
-          <!-- 新增表单 -->
-          <el-form ref="newDataForm" :model="newData" :rules="addUserFormRul" label-width="80px">
-            <el-form-item label="用户名" prop="userName">
-              <el-input v-model="newData.userName" required></el-input>
-            </el-form-item>
-             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="newData.email" type="email"></el-input>
-             </el-form-item>
-             <el-form-item label="密码" prop="password">
-                <el-input v-model.trim="newData.password" placeholder="请输入密码" type="password" show-password/>
-             </el-form-item>
-             <el-form-item label="确认密码" prop="confirmPassword">
-                 <el-input v-model.trim="newData.confirmPassword" placeholder="请输入密码" type="password" show-password/>
-             </el-form-item>
-          </el-form>
-
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="submitForm()">确 定</el-button>
-          </span>
-        </el-dialog>
-      </div>
     <table class="user-table">
       <thead>
         <tr>
-          <th>用户名</th>
+          <th>项目组名</th>
+          <th>项目组负责人</th>
           <th>邮箱</th>
-          <th>角色</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in project" :key="user.id">
           <td>{{ user.userName }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>

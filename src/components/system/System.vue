@@ -1,6 +1,6 @@
 <template>
   <div class="user-page">
-    <h1>用户列表</h1>
+    <h1>系统设置</h1>
     <div>
         <!-- 触发弹框的按钮 -->
         <el-button class="newUserClass" @click="addNewUser()">新增</el-button>
@@ -12,7 +12,7 @@
           @close="resetUserForm()">
           <!-- 新增表单 -->
           <el-form ref="newDataForm" :model="newData" :rules="addUserFormRul" label-width="80px">
-            <el-form-item label="用户名" prop="userName">
+            <el-form-item label="名称" prop="userName">
               <el-input v-model="newData.userName" required></el-input>
             </el-form-item>
              <el-form-item label="邮箱" prop="email">
@@ -35,9 +35,10 @@
     <table class="user-table">
       <thead>
         <tr>
-          <th>用户名</th>
-          <th>邮箱</th>
-          <th>角色</th>
+          <th>名称</th>
+          <th>编码</th>
+          <th>描述</th>
+          <th>状态</th>
           <th>操作</th>
         </tr>
       </thead>
