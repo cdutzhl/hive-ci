@@ -7,6 +7,8 @@ import Cases from "../components/Cases.vue"
 import Project from "../components/system/project/Project.vue"
 import User from "../components/system/user/User.vue"
 import System from "../components/system/System.vue"
+import ClientNode from "../components/system//node/ClientNode.vue"
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -38,6 +40,10 @@ const routes = [{
             path: '/system',
             name:'/system',
             component: System
+        },{
+            path: '/clientNode',
+            name:'/clientNode',
+            component: ClientNode
         }
 
     ]},

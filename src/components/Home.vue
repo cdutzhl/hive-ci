@@ -36,13 +36,19 @@
                 <span>项目组管理</span>
               </template>
             </el-menu-item>
-               </el-menu-item>
-                 <el-menu-item index="/system">
+             <el-menu-item index="/system">
                   <template slot="title">
                     <i class="el-icon-document-copy"></i>
                   <span>系统管理</span>
                </template>
             </el-menu-item>
+             <el-menu-item index="/clientNode">
+               <template slot="title">
+                    <i class="el-icon-document-copy"></i>
+                  <span>节点管理</span>
+               </template>
+            </el-menu-item>
+
           </el-submenu>
           <!-- 接口管理 -->
           <el-submenu index="interfacaseManage">

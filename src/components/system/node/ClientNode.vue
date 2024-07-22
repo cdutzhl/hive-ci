@@ -1,35 +1,33 @@
 <template>
-  <div class="config-page">
-    <h1>系统设置</h1>
+  <div class="node-page">
+    <h1>节点管理</h1>
     <div>
         <!-- 触发弹框的按钮 -->
-        <el-button class="newConfigClass" @click="addNewConfig()">新增</el-button>
+        <el-button class="newNodeClass" @click="addNewNode()">新增</el-button>
 
         <!-- 新增弹框 -->
         <el-dialog
-          title="新增配置"
+          title="新增节点-"
           :visible.sync="dialogVisible"
-          @close="resetConfigForm()">
+          @close="resetNodeForm()">
           <!-- 新增表单 -->
           <el-form ref="newDataForm" :model="newData"  label-width="80px">
-            <el-form-item label="编码" prop="configCode">
-              <el-input v-model="newData.configCode" required></el-input>
+            <el-form-item label="服务名" prop="serverName">
+              <el-input v-model="newData.serverName" required></el-input>
             </el-form-item>
-            <el-form-item label="数值" prop="configValue">
-              <el-input v-model="newData.configValue" required></el-input>
+            <el-form-item label="地址" prop="ip">
+              <el-input v-model="newData.ip" required></el-input>
+            </el-form-item>
+            <el-form-item label="端口" prop="port">
+              <el-input v-model="newData.port" required></el-input>
             </el-form-item>
             <el-form-item label="描述" prop="describeMsg">
               <el-input v-model="newData.describeMsg" required></el-input>
             </el-form-item>
             <el-form-item label="状态" prop="active">
-                <el-radio   v-model="newData.active" label="Y" >生效</el-radio>
-                <el-radio   v-model="newData.active" label="N" >不生效</el-radio>
+                <el-radio   v-model="newData.active" label="Y" >启用</el-radio>
+                <el-radio   v-model="newData.active" label="N" >关闭</el-radio>
             </el-form-item>
-            <el-form-item label="级别" prop="level">
-                <el-radio   v-model="newData.level" label="1" >系统</el-radio>
-                <el-radio   v-model="newData.level" label="0" >项目</el-radio>
-            </el-form-item>
-
           </el-form>
 
           <span slot="footer" class="dialog-footer">
@@ -38,38 +36,34 @@
           </span>
         </el-dialog>
       </div>
-    <table class="config-table">
+    <table class="node-table">
       <thead>
         <tr>
-          <th>编码</th>
-          <th>数值</th>
+          <th>名称</th>
+          <th>服务名</th>
+          <th>地址</th>
+          <th>端口</th>
           <th>描述</th>
           <th>状态</th>
-          <th>级别</th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in configs" :key="item.id">
-          <td>{{ item.configCode }}</td>
-          <td>{{ item.configValue }}</td>
+        <tr v-for="item in nodes" :key="item.id">
+          <td>{{ item.serverName }}</td>
+          <td>{{ item.code }}</td>
+          <td>{{ item.ip }}</td>
+          <td>{{ item.port }}</td>
           <td>{{ item.describeMsg }}</td>
           <td>{{ item.active }}</td>
-          <td>{{ item.level }}</td>
           <td>
-            <button @click="editConfig(item)">编辑</button>
-            <button @click="deleteConfig(item)">删除</button>
+            <button @click="editNode(item)">编辑</button>
+            <button @click="deleteNode(item)">删除</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <div class="config-details" v-if="selectedConfig">
-      <h2>{{ selectedConfig.userName }}</h2>
-      <p>邮箱: {{ selectedConfig.email }}</p >
-      <p>角色: {{ selectedConfig.role }}</p >
-      <p>注册时间: {{ selectedConfig.createdAt }}</p >
-      <button @click="closeUserDetails">关闭</button>
-    </div>
+
      <!-- 分页部分 -->
       <div class="elPaginations">
         <el-pagination layout="slot" :total="Pages.total">
@@ -99,12 +93,11 @@
     import axios from 'axios';
 
     export default {
-      name: 'ConfigPage',
+      name: 'NodePage',
       data() {
         return {
           active: "Y",
-          level: "1",
-          configs: [],
+          nodes: [],
           selectedConfig:null,
           dialogVisible: false,
            // 分页排序数据
@@ -118,16 +111,17 @@
           },
           newData: {
              id: '',
-             configCode: '',
-             configValue: '',
-             describeMsg: '',
+             serverName: '',
+             code: '',
+             ip: '',
+             port: '',
              active: '',
-             level: ''
+             describeMsg: ''
           }
         }
       },
       mounted() {
-        this.getConfigList();
+        this.getNodeList();
       },
       methods: {
         // 页数改变
@@ -139,32 +133,39 @@
         handleSizeChange(val) {
             this.Pages.pageIndex = 1;
             this.Pages.pageSize = val;
-            this.getConfigList();
+            this.getNodeList();
         },
-        resetConfigForm() {
+        resetNodeForm() {
             this.$refs.newDataForm.resetFields();
         },
-        addNewConfig() {
+        addNewNode() {
             this.dialogVisible = true;
+            this.newData.id = '';
+            this.newData.serverName = '';
+            this.newData.ip = '';
+            this.newData.code = '';
+            this.newData.port = '';
+            this.newData.active = 'Y';
+            this.newData.describeMsg =  '';
         },
         submitForm() {
             this.$refs.newDataForm.validate(valid=>{
                 if(!valid){
                     return;
                 }
-                 this.$request.put('/api/config/add', this.newData).then(response => {
+                 this.$request.put('/api/clientNode/add', this.newData).then(response => {
                      console.info(response);
                      if (response.status == 200) {
-                        this.$message.success('添加配置成功！');
-                        this.getConfigList();
+                        this.$message.success('添加节点成功！');
+                        this.getNodeList();
                         this.dialogVisible = false;
                      } else {
-                        return this.$message.error('添加配置失败！');
+                        return this.$message.error('添加节点失败！');
                      }
                  })
             })
         },
-        getConfigList() {
+        getNodeList() {
              const loading = this.$loading({
                   // 开启数据加载效果
                   lock: true,
@@ -172,44 +173,42 @@
                   spinner: "el-icon-loading",
                   background: "rgba(255,255,255,.5)",
              });
-            this.$request.get('/api/config/list', {
+            this.$request.get('/api/clientNode/list', {
                  params: {
                     pageIndex: this.Pages.pageIndex,
                     pageSize: this.Pages.pageSize
                   }
             }).then(response => {
                 console.log(response.data.data);
-                this.configs = response.data.data;
+                this.nodes = response.data.data;
                 loading.close(); // 关闭数据加载效果
                 this.Pages.total = response.data.total;
             }).catch(error => {
                 console.error('Error fetching config', error);
             })
         },
-        showUserDetails(config) {
-          this.selectedConfig = user;
+        showNodeDetails(item) {
+          this.selectedConfig = item;
         },
-        closeUserDetails() {
-          this.selectedConfig = null;
-        },
-        editConfig(config) {
+        editNode(item) {
           this.dialogVisible = true;
-          this.newData.id = config.id;
-          this.newData.configCode = config.configCode;
-          this.newData.configValue = config.configValue;
-          this.newData.describeMsg = config.describeMsg;
-          this.newData.active = config.active == "生效" ? "Y" : "N";
-          this.newData.level = config.level == "系统" ? "1" : "0";
+          this.newData.id = item.id;
+          this.newData.serverName = item.serverName;
+          this.newData.ip = item.ip;
+          this.newData.port = item.port;
+          this.newData.describeMsg = item.describeMsg;
+          this.newData.active = item.active == "生效" ? "Y" : "N";
+
         },
-        deleteConfig(config) {
-          console.log('编辑配置:', config);
+        deleteNode(item) {
+          console.log('编辑配置:', item);
           // 删除用户逻辑
-           this.$request.delete('/api/config/delete/' + config.id).then(response => {
+           this.$request.delete('/api/clientNode/delete/' + config.id).then(response => {
                if (response.status == 200) {
-                  this.$message.success('删除配置成功！');
-                  this.getConfigList();
+                  this.$message.success('删除节点成功！');
+                  this.getNodeList();
                } else {
-                  return this.$message.error('删除配置失败！');
+                  return this.$message.error('删除节点失败！');
                }
            })
         }
@@ -218,27 +217,27 @@
 </script>
 
 <style scoped>
-.newConfigClass {
+.newNodeClass {
   float: right; /* 使按钮浮动到容器的右边 */
 }
-.config-page {
+.node-page {
   padding: 20px;
 }
 
-.config-table {
+.node-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.config-table th,
-.config-table td {
+.node-table th,
+.node-table td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
 
-.config-details {
+.node-details {
   background-color: #f5f5f5;
   border-radius: 8px;
   padding: 20px;
