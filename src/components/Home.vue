@@ -16,10 +16,31 @@
     <el-container>
       <!-- 侧边菜单栏 -->
       <el-aside width="250px">
-        <el-menu :router='rou' background-color='#003055' class="el-menu-demo" default-active='/cases'
+        <el-menu :router='rou' background-color='#003055' class="el-menu-demo" default-active='/projectStatus'
                  text-color="#fff" active-text-color="#00aaff" unique-opened>
-          <!-- 项目管理 -->
-          <el-submenu index="projectManage">
+        <!-- 项目管理 -->
+         <el-submenu index="projectManage">
+           <template slot="title">
+             <i class="el-icon-s-home"></i>
+             <span>项目管理</span>
+           </template>
+           <el-menu-item index="/newProject">
+             <template slot="title">
+               <i class="el-icon-document-copy"></i>
+               <span>新建项目</span>
+             </template>
+           </el-menu-item>
+            <el-menu-item index="/projectStatus">
+             <template slot="title">
+               <i class="el-icon-document-copy"></i>
+               <span>项目状态</span>
+             </template>
+           </el-menu-item>
+
+         </el-submenu>
+
+          <!-- 系统管理 -->
+          <el-submenu index="systemManage">
             <template slot="title">
               <i class="el-icon-s-home"></i>
               <span>系统管理</span>

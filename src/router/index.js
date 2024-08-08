@@ -8,6 +8,7 @@ import Project from "../components/system/project/Project.vue"
 import User from "../components/system/user/User.vue"
 import System from "../components/system/System.vue"
 import ClientNode from "../components/system//node/ClientNode.vue"
+import AddProject from "../components/project/AddProject.vue"
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,10 @@ const routes = [{
             path: '/clientNode',
             name:'/clientNode',
             component: ClientNode
+        },{
+            path: '/newProject',
+            name:'/newProject',
+            component: AddProject
         }
 
     ]},

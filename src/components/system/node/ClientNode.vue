@@ -12,8 +12,11 @@
           @close="resetNodeForm()">
           <!-- 新增表单 -->
           <el-form ref="newDataForm" :model="newData"  label-width="80px">
-            <el-form-item label="服务名" prop="serverName">
+            <el-form-item label="名称" prop="serverName">
               <el-input v-model="newData.serverName" required></el-input>
+            </el-form-item>
+            <el-form-item label="服务名" prop="code">
+              <el-input v-model="newData.code" required></el-input>
             </el-form-item>
             <el-form-item label="地址" prop="ip">
               <el-input v-model="newData.ip" required></el-input>
@@ -193,6 +196,7 @@
         editNode(item) {
           this.dialogVisible = true;
           this.newData.id = item.id;
+          this.newData.code = item.code;
           this.newData.serverName = item.serverName;
           this.newData.ip = item.ip;
           this.newData.port = item.port;
@@ -203,7 +207,7 @@
         deleteNode(item) {
           console.log('编辑配置:', item);
           // 删除用户逻辑
-           this.$request.delete('/api/clientNode/delete/' + config.id).then(response => {
+           this.$request.delete('/api/clientNode/delete/' + item.id).then(response => {
                if (response.status == 200) {
                   this.$message.success('删除节点成功！');
                   this.getNodeList();
