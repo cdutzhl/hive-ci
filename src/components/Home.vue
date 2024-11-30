@@ -22,7 +22,7 @@
          <el-submenu index="projectManage">
            <template slot="title">
              <i class="el-icon-s-home"></i>
-             <span>项目管理</span>
+             <span>持续集成</span>
            </template>
            <el-menu-item index="/newProject">
              <template slot="title">
@@ -33,10 +33,15 @@
             <el-menu-item index="/projectStatus">
              <template slot="title">
                <i class="el-icon-document-copy"></i>
-               <span>项目状态</span>
+               <span>持续集成</span>
              </template>
            </el-menu-item>
-
+            <el-menu-item index="/clientNode">
+               <template slot="title">
+                    <i class="el-icon-document-copy"></i>
+                  <span>客户端管理</span>
+               </template>
+            </el-menu-item>
          </el-submenu>
 
           <!-- 系统管理 -->
@@ -63,40 +68,35 @@
                   <span>系统管理</span>
                </template>
             </el-menu-item>
-             <el-menu-item index="/clientNode">
-               <template slot="title">
-                    <i class="el-icon-document-copy"></i>
-                  <span>节点管理</span>
-               </template>
-            </el-menu-item>
+
 
           </el-submenu>
           <!-- 接口管理 -->
           <el-submenu index="interfacaseManage">
             <template slot="title">
               <i class="el-icon-folder-opened"></i>
-              <span>接口管理</span>
+              <span>运维服务</span>
             </template>
+            <el-menu-item index="/syslog">
+              <template slot="title">
+                <i class="el-icon-tickets"></i>
+                <span>系统日志</span>
+              </template>
+            </el-menu-item>
+            <el-menu-item index="/clientNodeStatus">
+              <template slot="title">
+                <i class="el-icon-tickets"></i>
+                <span>监控服务</span>
+              </template>
+            </el-menu-item>
             <el-menu-item index="/interface">
               <template slot="title">
                 <i class="el-icon-tickets"></i>
-                <span>接口列表</span>
+                <span>数据分析</span>
               </template>
             </el-menu-item>
           </el-submenu>
-          <!-- 用例管理 -->
-          <el-submenu index="caseManage">
-            <template slot="title">
-              <i class="el-icon-notebook-2"></i>
-              <span>用例管理</span>
-            </template>
-            <el-menu-item index="/cases">
-              <template slot="title">
-                <i class="el-icon-notebook-1"></i>
-                <span>用例列表</span>
-              </template>
-            </el-menu-item>
-          </el-submenu>
+
         </el-menu>
       </el-aside>
       <!-- 主体内容显示区域 -->

@@ -2,29 +2,35 @@
   <div class="addProject-page" id="app">
      <h1>新建项目</h1>
     <div class="container">
-      <form @submit.prevent="createProject" class="project-form">
+      <el-form  :model="newData" class="project-form">
+
         <div class="form-group">
           <label for="project-name" class="form-label">项  目  名  称:</label>
-          <input type="text" id="project-name" v-model="projectName" placeholder="输入项目名称" class="form-control" required>
+           <el-input id="projectName" v-model="newData.projectName" placeholder="输入项目名称"  required></el-input>
         </div>
 
         <div class="form-group">
           <label for="project-description" class="form-label">项  目  描  述:</label>
-          <textarea id="project-description" v-model="projectDescription" placeholder="输入项目描述" class="form-control" required></textarea>
+           <el-input id="desc" v-model="newData.desc" placeholder="输入项目描述"  required></el-input>
         </div>
 
         <div class="form-group">
-                  <label for="project-repository" class="form-label">仓  库  地  址:</label>
-                  <input type="text" id="project-repository" v-model="projectRepository" placeholder="输入仓库地址" class="form-control" required>
+          <label for="project-repository" class="form-label">仓  库  地  址:</label>
+          <el-input id="repository" v-model="newData.repository" placeholder="输入仓库地址"  required></el-input>
         </div>
+
+           <div class="form-group">
+                  <label for="project-repository" class="form-label">分     支:</label>
+                  <el-input id="repository" v-model="newData.branch" placeholder="输入构建分支"  required></el-input>
+                </div>
 
         <div class="form-group">
           <label for="pipeline-script" class="form-label">Pipeline 脚本:</label>
-          <textarea id="pipeline-script" v-model="pipelineScript" placeholder="Pipeline脚本" rows="20" class="form-control" required></textarea>
+          <el-input type="textarea" id="pipeline-script" v-model="newData.pipelineScript" placeholder="Pipeline脚本" rows="15"  required></el-input>
         </div>
 
-        <button type="submit" class="btn btn-primary">创建项目</button>
-      </form>
+        <button type="submit" @click="createProject()" class="btn btn-primary">创建项目</button>
+        </el-form>
     </div>
   </div>
 </template>
@@ -34,21 +40,25 @@ export default {
   name: 'App',
   data() {
     return {
-      projectName: '',
-      projectDescription: '',
-      projectType: '',
-      projectRepository: '',
-      pipelineScript: ''
+      newData: {
+        projectName: '',
+        desc: '',
+        repository: '',
+        pipelineScript: ''
+      }
     }
   },
   methods: {
     createProject() {
-      // 在这里添加创建Jenkins项目的逻辑
-      console.log('Project Name:', this.projectName);
-      console.log('Project Description:', this.projectDescription);
-      console.log('Project Type:', this.projectType);
-      console.log('Repository URL:', this.projectRepository);
-      console.log('Pipeline Script:', this.pipelineScript);
+       this.$request.put('/api/project/add', this.newData).then(response => {
+              console.info(response);
+              if (response.status == 200) {
+                 this.$message.success('添加用户成功！');
+                 this.$router.push('projectStatus');
+              } else {
+                 return this.$message.error('添加用户失败！');
+              }
+       })
     }
   }
 }

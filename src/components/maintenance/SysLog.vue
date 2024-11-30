@@ -1,53 +1,62 @@
 <template>
   <div class="user-page">
-    <h1>项目列表</h1>
+    <h1>日志管理</h1>
 
     <table class="user-table">
       <thead>
         <tr>
-          <th>项目组名</th>
-          <th>项目组负责人</th>
-          <th>邮箱</th>
+          <th>操作人</th>
+          <th>操作时间</th>
           <th>操作</th>
+          <th>执行时间</th>
+          <th>日志级别</th>
         </tr>
       </thead>
       <tbody>
         <tr >
-          <td>hive</td>
           <td>nett</td>
-          <td>nett@163.com</td>
-          <td>
-            <button @click="showUserDetails(user)">编辑用户</button>
-           <!--     <button @click="editUser(user)">编辑</button> -->
+          <td>2024-10-22 12:09:20</td>
+          <td>系统管理：编辑用户(dave)</td>
+          <td>0.28 S</td>
+          <td>系统</td>
 
-          </td>
+        </tr>
+        <tr >
+            <td>nett</td>
+            <td>2024-10-22 12:09:28</td>
+            <td>系统管理</td>
+            <td>0.18 S</td>
+            <td>系统</td>
         </tr>
           <tr >
-                  <td>builder</td>
-                  <td>dave</td>
-                  <td>dave@163.com</td>
-                  <td>
-                    <button @click="showUserDetails(user)">编辑用户</button>
-                   <!--     <button @click="editUser(user)">编辑</button> -->
-
-                  </td>
-                </tr>
+                <td>nett</td>
+                <td>2024-10-22 12:02:23</td>
+                <td>登录系统</td>
+                <td>0.56 S</td>
+                <td>系统</td>
+          </tr>
+           <tr >
+              <td>nett</td>
+              <td>2024-10-21 20:23:05</td>
+              <td>退出系统</td>
+              <td>0.12 S</td>
+              <td>系统</td>
+         </tr>
+            <tr >
+                   <td>nett</td>
+                   <td>2024-10-21 20:02:35</td>
+                   <td>持续集成：hive</td>
+                   <td>2m25S</td>
+                   <td>业务</td>
+            </tr>
       </tbody>
     </table>
-    <div class="user-details" v-if="selectedUser">
-      <h2>{{ selectedUser.userName }}</h2>
-      <p>邮箱: {{ selectedUser.email }}</p >
-      <p>角色: {{ selectedUser.role }}</p >
-      <p>注册时间: {{ selectedUser.createdAt }}</p >
-      <button @click="closeUserDetails">关闭</button>
-    </div>
+
      <!-- 分页部分 -->
       <div class="elPaginations">
         <el-pagination layout="slot" :total="Pages.total">
           <span class="leftPagination"
-            >共{{ Pages.total }}条记录，第{{ Pages.pageIndex }}/{{
-              Math.ceil(Pages.total / Pages.pageSize)
-            }}页面</span
+            >共12条记录，第1/3页面</span
           >
         </el-pagination>
         <el-pagination

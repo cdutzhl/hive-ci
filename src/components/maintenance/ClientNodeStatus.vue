@@ -1,53 +1,45 @@
 <template>
   <div class="user-page">
-    <h1>项目列表</h1>
+    <h1>节点监控</h1>
 
     <table class="user-table">
       <thead>
         <tr>
-          <th>项目组名</th>
-          <th>项目组负责人</th>
-          <th>邮箱</th>
-          <th>操作</th>
+          <th>节点</th>
+          <th>名称</th>
+          <th>服务</th>
+          <th>状态</th>
         </tr>
       </thead>
       <tbody>
         <tr >
-          <td>hive</td>
-          <td>nett</td>
-          <td>nett@163.com</td>
-          <td>
-            <button @click="showUserDetails(user)">编辑用户</button>
-           <!--     <button @click="editUser(user)">编辑</button> -->
+          <td>192.168.100.180</td>
+          <td>静态代码检查</td>
+          <td>STATIC_CHECK</td>
+          <td>Up</td>
 
-          </td>
+
         </tr>
-          <tr >
-                  <td>builder</td>
-                  <td>dave</td>
-                  <td>dave@163.com</td>
-                  <td>
-                    <button @click="showUserDetails(user)">编辑用户</button>
-                   <!--     <button @click="editUser(user)">编辑</button> -->
+        <tr >
+        <td>192.168.100.181</td>
+             <td>镜像服务</td>
+             <td>DOCKER_SERVICE</td>
+         <td>Up</td>
+        </tr>
+         <td>192.168.100.181</td>
+            <td>单元测试</td>
+            <td>UNIT_TEST</td>
+         <td>Up</td>
 
-                  </td>
-                </tr>
+
       </tbody>
     </table>
-    <div class="user-details" v-if="selectedUser">
-      <h2>{{ selectedUser.userName }}</h2>
-      <p>邮箱: {{ selectedUser.email }}</p >
-      <p>角色: {{ selectedUser.role }}</p >
-      <p>注册时间: {{ selectedUser.createdAt }}</p >
-      <button @click="closeUserDetails">关闭</button>
-    </div>
+
      <!-- 分页部分 -->
       <div class="elPaginations">
         <el-pagination layout="slot" :total="Pages.total">
           <span class="leftPagination"
-            >共{{ Pages.total }}条记录，第{{ Pages.pageIndex }}/{{
-              Math.ceil(Pages.total / Pages.pageSize)
-            }}页面</span
+            >共12条记录，第1/3页面</span
           >
         </el-pagination>
         <el-pagination

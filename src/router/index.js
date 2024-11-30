@@ -7,8 +7,12 @@ import Cases from "../components/Cases.vue"
 import Project from "../components/system/project/Project.vue"
 import User from "../components/system/user/User.vue"
 import System from "../components/system/System.vue"
-import ClientNode from "../components/system//node/ClientNode.vue"
+import ClientNode from "../components/system/node/ClientNode.vue"
 import AddProject from "../components/project/AddProject.vue"
+import ProjectStatus from "../components/project/ProjectStatus.vue"
+import SysLog from "../components/maintenance/SysLog.vue"
+import ClientNodeStatus from "../components/maintenance/ClientNodeStatus.vue"
+import BuildLog from "../components/system/project/BuildLog.vue"
 
 Vue.use(VueRouter)
 
@@ -49,7 +53,26 @@ const routes = [{
             path: '/newProject',
             name:'/newProject',
             component: AddProject
+        },{
+            path: '/projectStatus',
+            name:'/projectStatus',
+            component: ProjectStatus
+        },{
+            path: '/syslog',
+            name:'/syslog',
+            component: SysLog
+        },{
+            path: '/clientNodeStatus',
+            name:'/clientNodeStatus',
+            component: ClientNodeStatus
+
+        },{
+            path: '/buildLog',
+            name:'/buildLog',
+            component: BuildLog
+
         }
+
 
     ]},
 ]
